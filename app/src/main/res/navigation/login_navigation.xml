@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_signin">
+    <fragment
+        android:id="@+id/navigation_signin"
+        android:name="com.upc.teoguide.ui.login.fragments.SignInFragment"
+        android:label="fragment_signin"
+        tools:layout="@layout/fragment_signin" >
+        <action
+            android:id="@+id/action_navigation_signin_to_navigation_signup"
+            app:destination="@id/navigation_signup" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_signup"
+        android:name="com.upc.teoguide.ui.login.fragments.SignUpFragment"
+        android:label="fragment_signup"
+        tools:layout="@layout/fragment_signup" >
+        <action
+            android:id="@+id/action_navigation_signup_to_navigation_signin"
+            app:destination="@id/navigation_signin" />
+    </fragment>
+</navigation>
