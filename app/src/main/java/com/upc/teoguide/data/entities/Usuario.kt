@@ -12,4 +12,5 @@ data class Usuario (
     val email: String?,
     @ColumnInfo(name = "password")
     val password: String?
+
 )
