@@ -29,6 +29,7 @@ class SignInFragment : Fragment() {
         val binding = FragmentSigninBinding.inflate(inflater,container,false)
         _binding = binding
         binding.loginButton.setOnClickListener {
+            /*
             var email = _binding?.userTextInput?.text.toString()
             var password = _binding?.passwordTextInput?.text.toString()
                 CoroutineScope(Dispatchers.IO).launch {
@@ -40,9 +41,11 @@ class SignInFragment : Fragment() {
                     var log = database?.usuarioDAO()?.findUser(usuario.email!!,usuario.password!!)
                     if(log == true)
                     {
+
                         var i = Intent(activity,HomeActivity::class.java)
                         startActivity(i)
                         activity?.finish()
+
                     }
                     else
                         Log.e("1","Usuario o contraseña incorrectas")
@@ -50,6 +53,10 @@ class SignInFragment : Fragment() {
                 else
                     Log.e("1","Complete los campos")
                 }
+            */
+            var i = Intent(activity,HomeActivity::class.java)
+            startActivity(i)
+            activity?.finish()
         }
         binding.signupTextView.setOnClickListener {
             val action = SignInFragmentDirections.actionNavigationSigninToNavigationSignup()

@@ -1,4 +1,4 @@
-package com.upc.teoguide.ui.principal.home
+package com.upc.teoguide.ui.principal.fragments.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

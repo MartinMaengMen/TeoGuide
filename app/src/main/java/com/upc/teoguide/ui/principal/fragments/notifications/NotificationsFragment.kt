@@ -1,4 +1,4 @@
-package com.upc.teoguide.ui.principal.notifications
+package com.upc.teoguide.ui.principal.fragments.notifications
 
 import android.os.Bundle
 import android.view.LayoutInflater

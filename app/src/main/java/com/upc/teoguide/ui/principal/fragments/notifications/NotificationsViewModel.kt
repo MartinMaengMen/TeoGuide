@@ -1,4 +1,4 @@
-package com.upc.teoguide.ui.principal.notifications
+package com.upc.teoguide.ui.principal.fragments.notifications
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

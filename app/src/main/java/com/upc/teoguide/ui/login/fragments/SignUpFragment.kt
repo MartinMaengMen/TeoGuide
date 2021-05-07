@@ -14,6 +14,9 @@ import com.upc.teoguide.data.local.AppDatabase
 import com.upc.teoguide.databinding.FragmentSigninBinding
 import com.upc.teoguide.databinding.FragmentSignupBinding
 import com.upc.teoguide.ui.login.viewmodels.SignUpViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment(){
     private var _binding: FragmentSignupBinding? = null
@@ -24,7 +27,11 @@ class SignUpFragment : Fragment(){
     ): View? {
         val binding = FragmentSignupBinding.inflate(inflater,container,false)
         _binding = binding
-        onClickRegisterButton()
+            //onClickRegisterButton()
+        _binding?.registerButton?.setOnClickListener {
+            val action = SignUpFragmentDirections.actionNavigationSignupToNavigationSignin()
+            NavHostFragment.findNavController(this).navigate(action)
+        }
         // Inflate the layout for this fragment
         return binding.root
     }
