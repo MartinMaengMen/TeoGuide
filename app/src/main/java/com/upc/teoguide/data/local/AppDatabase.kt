@@ -6,14 +6,15 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.upc.teoguide.data.entities.CentroHistorico
 import com.upc.teoguide.data.entities.Usuario
-import com.upc.teoguide.data.local.DAO.CentroHistoricoDAO
+//import com.upc.teoguide.data.local.DAO.CentroHistoricoDAO
 import com.upc.teoguide.data.local.DAO.UsuarioDAO
 
-@Database(entities = [Usuario::class, CentroHistorico::class], version = 1, exportSchema = false)
+//@Database(entities = [Usuario::class, CentroHistorico::class], version = 1, exportSchema = false)
+@Database(entities = [Usuario::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun usuarioDAO(): UsuarioDAO
-    abstract fun centroHistoricoDAO(): CentroHistoricoDAO
+    //abstract fun centroHistoricoDAO(): CentroHistoricoDAO
 
     companion object {
 

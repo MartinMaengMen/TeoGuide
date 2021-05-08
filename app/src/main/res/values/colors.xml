@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="purple_500">#2a3c4a</color>
+    <color name="purple_700">#1f2e3a</color>
+    <color name="teal_200">#dc635b</color>
+    <color name="teal_700">#d6483e</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="primary_50">#e5e8e9</color>
+    <color name="primary_100">#bfc5c9</color>
+    <color name="primary_200">#959ea5</color>
+    <color name="primary_300">#6a7780</color>
+    <color name="primary_400">#4a5965</color>
+    <color name="primary_500">#2a3c4a</color>
+    <color name="primary_600">#253643</color>
+    <color name="primary_700">#1f2e3a</color>
+    <color name="primary_800">#192732</color>
+    <color name="primary_900">#0f1a22</color>
+    <color name="primary_A100">#63b6ff</color>
+    <color name="primary_A200">#309fff</color>
+    <color name="primary_A400">#0087fc</color>
+    <color name="primary_A700">#0079e3</color>
+
+    <color name="secondary_50">#fae9e8</color>
+    <color name="secondary_100">#f3c8c5</color>
+    <color name="secondary_200">#eba49f</color>
+    <color name="secondary_300">#e27f78</color>
+    <color name="secondary_400">#dc635b</color>
+    <color name="secondary_500">#d6483e</color>
+    <color name="secondary_600">#d14138</color>
+    <color name="secondary_700">#cc3830</color>
+    <color name="secondary_800">#c63028</color>
+    <color name="secondary_900">#bc211b</color>
+    <color name="secondary_A100">#fff2f1</color>
+    <color name="secondary_A200">#ffc0be</color>
+    <color name="secondary_A400">#ff8f8b</color>
+    <color name="secondary_A700">#ff7672</color>
 </resources>

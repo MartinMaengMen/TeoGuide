@@ -1,15 +1,15 @@
-package com.upc.teoguide.data.entities
+package com.upc.teoguide.data.remote.response
 
+import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
+import java.io.Serializable
 
-
-@Parcelize
-data class CentroHistorico (
-
+@kotlinx.android.parcel.Parcelize
+data class CentroHistoricoRes(
     @SerializedName("id")
-    val id : Int,
+    val id: Int,
 
     @SerializedName("nombre")
     val nombre: String,
@@ -19,5 +19,4 @@ data class CentroHistorico (
 
     @SerializedName("imgUrl")
     val imgUrl: String
-
-) : Parcelable
+): Parcelable

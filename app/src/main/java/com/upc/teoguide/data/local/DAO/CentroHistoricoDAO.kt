@@ -4,7 +4,7 @@ import androidx.room.*
 import com.upc.teoguide.data.entities.CentroHistorico
 import com.upc.teoguide.data.entities.Usuario
 
-@Dao
+/*@Dao
 interface CentroHistoricoDAO {
     @Query("select * from centros_historicos")
     fun getAll(): MutableList<CentroHistorico>
@@ -20,4 +20,4 @@ interface CentroHistoricoDAO {
 
     @Update
     fun update(vararg centroHistorico: CentroHistorico)
-}
+}*/
