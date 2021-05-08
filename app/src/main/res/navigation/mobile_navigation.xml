@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.upc.teoguide.ui.principal.fragments.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detalleCentroFragment2"
+            app:destination="@id/detalleCentroFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,4 +26,15 @@
         android:name="com.upc.teoguide.ui.principal.fragments.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/detalleCentroFragment"
+        android:name="com.upc.teoguide.ui.principal.fragments.home.DetalleCentroFragment"
+        android:label="fragment_detalle_centro"
+        tools:layout="@layout/fragment_detalle_centro">
+
+        <argument android:name="centroArg"
+        app:argType="com.upc.teoguide.data.entities.CentroHistorico"/>
+    </fragment>
+
+
 </navigation>

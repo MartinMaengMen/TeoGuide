@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.upc.teoguide.data.entities.CentroHistorico
@@ -14,7 +15,7 @@ class ListaCentrosHistoricosAdapter(val context: Context, private val listener: 
     private val items: MutableList<CentroHistorico> = ArrayList()
 
     interface CentrosHistoricosListener{
-        fun onClickedCentroHistorico(centroHistorico: CentroHistorico, imageView: ImageView)
+        fun onClickedCentroHistorico(centroHistorico: CentroHistorico, textiView: TextView)
     }
 
     fun setItems(items: ArrayList<CentroHistorico>) {
@@ -28,7 +29,6 @@ class ListaCentrosHistoricosAdapter(val context: Context, private val listener: 
         val binding = ItemCentroHistoricoBinding.inflate(inflater, parent, false)
         return ViewHolder(binding, listener)
     }
-
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(items[position])
@@ -43,7 +43,7 @@ class ListaCentrosHistoricosAdapter(val context: Context, private val listener: 
 
         fun bind(item: CentroHistorico) {
             this.centroHistorico = item
-            binding.centrohistoricoImageView.transitionName = this.centroHistorico.id.toString()
+            binding.centrohistoricoDescriptionTextView.transitionName = this.centroHistorico.descripcion
             binding.centrohistoricoDescriptionTextView.text = this.centroHistorico.descripcion
             binding.centrohistoricoTitleTextView.text = this.centroHistorico.nombre
             Glide.with(context).load(this.centroHistorico.imgUrl).into(binding.centrohistoricoImageView)
@@ -51,7 +51,8 @@ class ListaCentrosHistoricosAdapter(val context: Context, private val listener: 
         }
 
         override fun onClick(v: View?){
-            listener.onClickedCentroHistorico(centroHistorico, binding.centrohistoricoImageView)
+            listener.onClickedCentroHistorico(centroHistorico, binding.centrohistoricoDescriptionTextView)
         }
     }
+
 }
