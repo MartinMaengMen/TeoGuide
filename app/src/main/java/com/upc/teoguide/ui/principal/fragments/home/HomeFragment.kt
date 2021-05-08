@@ -61,7 +61,7 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
     override fun onClickedCentroHistorico(centroHistorico: CentroHistorico, textView: TextView) {
         val action  = HomeFragmentDirections.actionNavigationHomeToDetalleCentroFragment2(centroHistorico)
         val extras = FragmentNavigatorExtras(
-            textView to centroHistorico.descripcion
+            textView to centroHistorico.id.toString()
         )
         NavHostFragment.findNavController(this).navigate(action, extras)
     }
