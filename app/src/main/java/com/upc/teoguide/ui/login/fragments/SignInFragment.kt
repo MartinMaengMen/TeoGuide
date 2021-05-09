@@ -18,27 +18,24 @@ import com.upc.teoguide.ui.principal.HomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class SignInFragment : Fragment() {
     private var _binding : FragmentSigninBinding? = null
-    val database = this.context?.let { AppDatabase.getInstance(it)}
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSigninBinding.inflate(inflater,container,false)
+        val database = this.context?.let { AppDatabase.getInstance(it)}
         _binding = binding
         binding.loginButton.setOnClickListener {
-            /*
-            var email = _binding?.userTextInput?.text.toString()
-            var password = _binding?.passwordTextInput?.text.toString()
+            var email = binding?.userTextInput?.text.toString()
+            var password = binding?.passwordTextInput?.text.toString()
+            if(email!="" && password!="")
                 CoroutineScope(Dispatchers.IO).launch {
-                    if(email!="" && password!=""){
-                        var usuario = Usuario(
-                            0,
-                            _binding?.userTextInput?.text.toString(),
-                            _binding?.passwordTextInput?.text.toString())
-                    var log = database?.usuarioDAO()?.findUser(usuario.email!!,usuario.password!!)
+                    var log = database?.usuarioDAO()?.findUser(email,password)
+                    withContext(Dispatchers.Main){
                     if(log == true)
                     {
 
@@ -48,15 +45,11 @@ class SignInFragment : Fragment() {
 
                     }
                     else
-                        Log.e("1","Usuario o contraseña incorrectas")
+                        Toast.makeText(this@SignInFragment.context,"Usuario o contraseña incorrectas",Toast.LENGTH_LONG).show()
+                    }
                 }
-                else
-                    Log.e("1","Complete los campos")
-                }
-            */
-            var i = Intent(activity,HomeActivity::class.java)
-            startActivity(i)
-            activity?.finish()
+            else
+                Toast.makeText(this@SignInFragment.context,"Complete los campos",Toast.LENGTH_LONG).show()
         }
         binding.signupTextView.setOnClickListener {
             val action = SignInFragmentDirections.actionNavigationSigninToNavigationSignup()

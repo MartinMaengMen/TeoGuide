@@ -20,22 +20,20 @@ import kotlinx.coroutines.launch
 
 class SignUpFragment : Fragment(){
     private var _binding: FragmentSignupBinding? = null
-    val database = this.context?.let { AppDatabase.getInstance(it)}
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSignupBinding.inflate(inflater,container,false)
+        val database = this.context?.let { AppDatabase.getInstance(it)}
         _binding = binding
-            //onClickRegisterButton()
-        _binding?.registerButton?.setOnClickListener {
-            val action = SignUpFragmentDirections.actionNavigationSignupToNavigationSignin()
-            NavHostFragment.findNavController(this).navigate(action)
+        CoroutineScope(Dispatchers.IO).launch {
+            onClickRegisterButton(database!!)
         }
         // Inflate the layout for this fragment
         return binding.root
     }
-    private fun onClickRegisterButton(){
+    private fun onClickRegisterButton(database: AppDatabase){
         _binding?.registerButton?.setOnClickListener {
             var email = _binding?.userTextInput?.text.toString()
             var password = _binding?.passwordTextInput?.text.toString()
