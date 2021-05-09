@@ -22,10 +22,10 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.upc.teoguide.ui.principal.fragments.notifications.NotificationsFragment"
+        android:id="@+id/navigation_profile"
+        android:name="com.upc.teoguide.ui.principal.fragments.profile.ProfileFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/detalleCentroFragment"
         android:name="com.upc.teoguide.ui.principal.fragments.home.DetalleCentroFragment"

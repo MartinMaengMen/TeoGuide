@@ -36,13 +36,15 @@ class SignUpFragment : Fragment(){
     private fun onClickRegisterButton(database: AppDatabase){
         _binding?.registerButton?.setOnClickListener {
             var email = _binding?.userTextInput?.text.toString()
+            var name = _binding?.nameTextInput?.text.toString()
             var password = _binding?.passwordTextInput?.text.toString()
             var verifyPassword = _binding?.verifyPasswordTextInput?.text.toString()
-            if(email!="" && password!="" && password == verifyPassword){
+            if(name !="" && email!="" && password!="" && password == verifyPassword){
                 var usuario = Usuario(
                     0,
                     _binding?.userTextInput?.text.toString(),
-                    _binding?.passwordTextInput?.text.toString())
+                    _binding?.passwordTextInput?.text.toString(),
+                    name)
                 SignUpViewModel(database!!).postUsuario(usuario)
                 val action = SignUpFragmentDirections.actionNavigationSignupToNavigationSignin()
                 NavHostFragment.findNavController(this).navigate(action)

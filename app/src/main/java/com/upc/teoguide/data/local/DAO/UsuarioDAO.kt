@@ -11,8 +11,8 @@ interface UsuarioDAO {
     @Query("select * from usuarios where id = :id")
     fun findById(id: Int): Usuario
 
-    @Query("select exists(select 1 from usuarios where email = :email and password = :password)")
-    fun findUser(email: String, password : String): Boolean
+    @Query("select id from usuarios where email = :email and password = :password")
+    fun findUser(email: String, password : String): Int
 
     @Delete
     fun delete(usuario: Usuario)

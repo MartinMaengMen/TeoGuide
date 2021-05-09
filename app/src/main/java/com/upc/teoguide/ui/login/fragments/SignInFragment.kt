@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.upc.teoguide.data.base.Global
 import com.upc.teoguide.data.entities.Usuario
 import com.upc.teoguide.data.local.AppDatabase
 import com.upc.teoguide.databinding.FragmentSigninBinding
@@ -36,9 +37,9 @@ class SignInFragment : Fragment() {
                 CoroutineScope(Dispatchers.IO).launch {
                     var log = database?.usuarioDAO()?.findUser(email,password)
                     withContext(Dispatchers.Main){
-                    if(log == true)
+                    if(log != 0)
                     {
-
+                        Global.usuarioId = log
                         var i = Intent(activity,HomeActivity::class.java)
                         startActivity(i)
                         activity?.finish()
