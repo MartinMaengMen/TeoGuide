@@ -146,6 +146,12 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
                 100f,
                 locationListener
             )
+            locationManager?.requestLocationUpdates(
+                LocationManager.NETWORK_PROVIDER,
+                20L,
+                100f,
+                locationListener
+            )
         }
     }
 
