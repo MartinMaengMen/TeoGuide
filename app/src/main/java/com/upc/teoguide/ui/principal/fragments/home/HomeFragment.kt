@@ -3,14 +3,19 @@ package com.upc.teoguide.ui.principal.fragments.home
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
-import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -21,6 +26,7 @@ import com.upc.teoguide.data.entities.CentroHistorico
 import com.upc.teoguide.databinding.FragmentHomeBinding
 import com.upc.teoguide.ui.principal.fragments.home.adapters.ListaCentrosHistoricosAdapter
 import kotlin.collections.ArrayList
+import kotlin.math.roundToInt
 
 class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricosListener {
     private lateinit var adapter: ListaCentrosHistoricosAdapter
@@ -28,20 +34,23 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
     private val binding get() = _binding!!
     private val model: HomeViewModel by viewModels()
 
+    private var locationManager: LocationManager? = null
+
     companion object {
         const val CHANNEL_ID = "com.upc.teoguide.CHANNEL"
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         var binding = FragmentHomeBinding.inflate(inflater, container, false)
         _binding = binding
         setUpRecyclerView()
         setUpObservers()
-        setUpNotifications()
+        getLocation()
+        //setUpNotifications()
         return binding.root
 
     }
@@ -62,9 +71,9 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
         })
     }
 
-    private fun setUpNotifications() {
+    private fun setUpNotifications(title: String, description: String) {
         createNotificationChannel()
-        createNotification()
+        createNotification(title, description)
     }
 
     override fun onDestroyView() {
@@ -80,11 +89,11 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
         NavHostFragment.findNavController(this).navigate(action, extras)
     }
 
-    private fun createNotification() {
+    private fun createNotification(title: String, description: String) {
         var builder = NotificationCompat.Builder(binding.root.context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
-            .setContentTitle("Titulo de notificacion")
-            .setContentText("Cuerpo de notificacion")
+            .setContentTitle(title)
+            .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         val manager: NotificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -101,7 +110,42 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
             }
             val manager: NotificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             manager.createNotificationChannel(channel)
+        }
+    }
 
+    private fun getLocation() {
+        locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+
+        if (ContextCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_FINE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED ) {
+            requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),100)
+        } else {
+            val locCaral = Location(LocationManager.GPS_PROVIDER)
+            var locationListener :LocationListener  = LocationListener { currentLocation ->
+                Log.d("============================latitude", currentLocation.latitude.toString())
+                Log.d("==========================longitud",currentLocation.longitude.toString())
+
+                locCaral.latitude = -10.891901050774242
+                locCaral.longitude = -77.52299354839664
+                Log.d("=========loc1", locCaral.toString())
+
+                val diff = currentLocation.distanceTo(locCaral)
+                Log.d("======diff", diff.toString())
+                if(diff < 10000) {
+                    val title = "Sitio arqueológico de interés cercano"
+                    val description = "Caral esta a ${(diff / 1000).roundToInt()}km. de ti"
+                    setUpNotifications(title, description)
+                    Log.d("===msg", description)
+                }
+            }
+            locationManager?.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                20L,
+                100f,
+                locationListener
+            )
         }
     }
 
