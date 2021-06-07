@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private const val API_BASE_URL = "https://service-novapps-tp.azurewebsites.net/api/"
+    private const val API_BASE_URL = "https://teoguideapi.azurewebsites.net/api/"
     private var apiService: ApiService? = null
 
     fun build(): ApiService? {

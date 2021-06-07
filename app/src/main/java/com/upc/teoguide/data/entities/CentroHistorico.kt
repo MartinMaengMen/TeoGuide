@@ -17,6 +17,12 @@ data class CentroHistorico (
     val descripcion: String,
 
     @SerializedName("imgUrl")
-    val imgUrl: String
+    val imgUrl: String,
+
+    @SerializedName("latitud")
+    val latitud: Double,
+
+    @SerializedName("longitud")
+    val longitud: Double
 
 ) : Parcelable

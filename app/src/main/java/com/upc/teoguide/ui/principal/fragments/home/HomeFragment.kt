@@ -4,6 +4,10 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
@@ -21,10 +25,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.squareup.picasso.Picasso
 import com.upc.teoguide.R
 import com.upc.teoguide.data.entities.CentroHistorico
 import com.upc.teoguide.databinding.FragmentHomeBinding
 import com.upc.teoguide.ui.principal.fragments.home.adapters.ListaCentrosHistoricosAdapter
+import retrofit2.http.Url
+import java.lang.Exception
+import java.net.URI
+import java.net.URL
 import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
@@ -34,7 +45,7 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
     private val binding get() = _binding!!
     private val model: HomeViewModel by viewModels()
 
-    private var locationManager: LocationManager? = null
+    private lateinit var focusedLocation : FusedLocationProviderClient
 
     companion object {
         const val CHANNEL_ID = "com.upc.teoguide.CHANNEL"
@@ -47,6 +58,7 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
     ): View? {
         var binding = FragmentHomeBinding.inflate(inflater, container, false)
         _binding = binding
+        focusedLocation = LocationServices.getFusedLocationProviderClient(binding.root.context)
         setUpRecyclerView()
         setUpObservers()
         getLocation()
@@ -71,9 +83,9 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
         })
     }
 
-    private fun setUpNotifications(title: String, description: String) {
+    private fun setUpNotifications(title: String, description: String, image : String) {
         createNotificationChannel()
-        createNotification(title, description)
+        createNotification(title, description, image)
     }
 
     override fun onDestroyView() {
@@ -89,11 +101,32 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
         NavHostFragment.findNavController(this).navigate(action, extras)
     }
 
-    private fun createNotification(title: String, description: String) {
+    private fun createNotification(title: String, description: String, imageNotification: String) {
+        val largeIcon : Bitmap = BitmapFactory.decodeResource(resources, R.mipmap.ic_teoguide_logo_foreground)
+        lateinit var image : Bitmap
+
+        Picasso.get().load(imageNotification).into(object: com.squareup.picasso.Target {
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                if (bitmap != null) {
+                    image = bitmap
+                }
+            }
+
+            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+                image = BitmapFactory.decodeResource(resources, R.mipmap.ic_teoguide_logo_foreground)
+            }
+
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                image = BitmapFactory.decodeResource(resources, R.mipmap.ic_teoguide_logo_foreground)
+            }
+        })
+
         var builder = NotificationCompat.Builder(binding.root.context, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle(title)
             .setContentText(description)
+            .setLargeIcon(largeIcon)
+            .setStyle(NotificationCompat.BigPictureStyle().bigPicture(image).bigLargeIcon(null))
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         val manager: NotificationManager = requireActivity().getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -113,46 +146,53 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
         }
     }
 
-    private fun getLocation() {
-        locationManager = requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
+    private fun getLocation() {
         if (ContextCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED &&
             ContextCompat.checkSelfPermission(binding.root.context, android.Manifest.permission.ACCESS_COARSE_LOCATION)
             != PackageManager.PERMISSION_GRANTED ) {
             requestPermissions(arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),100)
         } else {
-            val locCaral = Location(LocationManager.GPS_PROVIDER)
-            var locationListener :LocationListener  = LocationListener { currentLocation ->
-                Log.d("============================latitude", currentLocation.latitude.toString())
-                Log.d("==========================longitud",currentLocation.longitude.toString())
+            focusedLocation.lastLocation.addOnSuccessListener { currentlocation: Location? ->
+                Log.d("===latitude", currentlocation?.latitude.toString())
+                Log.d("======longitud",currentlocation?.longitude.toString())
 
-                locCaral.latitude = -10.891901050774242
-                locCaral.longitude = -77.52299354839664
-                Log.d("=========loc1", locCaral.toString())
+                if (currentlocation != null) {
+                    searchNearbyCentros(currentlocation)
+                }
+            }
+        }
+    }
 
-                val diff = currentLocation.distanceTo(locCaral)
-                Log.d("======diff", diff.toString())
-                if(diff < 10000) {
-                    val title = "Sitio arqueológico de interés cercano"
-                    val description = "Caral esta a ${(diff / 1000).roundToInt()}km. de ti"
-                    setUpNotifications(title, description)
+    private fun searchNearbyCentros(currentPosition:Location) {
+        val nearbyCentros : MutableList<CentroHistorico> = ArrayList()
+        val nearbyDistances : ArrayList<Double> = ArrayList()
+        model.getCentrosHistoricos().observe(viewLifecycleOwner, { centroHistoricos ->
+
+            if(centroHistoricos != null){
+                for (centro in centroHistoricos) {
+                    val locationPlace = Location(LocationManager.GPS_PROVIDER)
+                    locationPlace.latitude = centro.latitud
+                    locationPlace.longitude = centro.longitud
+
+                    if (currentPosition.distanceTo(locationPlace) < 10000) {
+                        nearbyCentros.add(centro)
+                        nearbyDistances.add(currentPosition.distanceTo(locationPlace).toDouble())
+                    }
+                }
+                Log.d("===nearbyCentros", nearbyCentros.toString())
+                Log.d("===nearbyDistances", nearbyDistances.toString())
+                if (nearbyCentros.size != 0) {
+                    val title = "Sitio arqueológico cercano que puede interesarte"
+                    val description = "${nearbyCentros[0].nombre} esta a ${(nearbyDistances[0] / 1000).roundToInt()}km. de ti"
+                    setUpNotifications(title, description, nearbyCentros[0].imgUrl)
+
                     Log.d("===msg", description)
                 }
             }
-            locationManager?.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                20L,
-                100f,
-                locationListener
-            )
-            locationManager?.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER,
-                20L,
-                100f,
-                locationListener
-            )
-        }
+        })
+
     }
 
     //SI SIRVE
