@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/userImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -39,15 +39,22 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="CORREO" />
 
-    <TextView
-        android:id="@+id/correoDescriptionTextView"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/correoTextInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:textSize="15sp"
+        android:layout_marginRight="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:enabled="false"
         app:layout_constraintTop_toBottomOf="@id/correoTitleTextView"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="TextView" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/correoDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:id="@+id/directionTitleTextView"
@@ -57,16 +64,45 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="20dp"
         android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/correoDescriptionTextView"
+        app:layout_constraintTop_toBottomOf="@id/correoTextInputLayout"
         app:layout_constraintStart_toStartOf="parent"
         android:text="DIRECCIÓN" />
 
-    <TextView
-        android:id="@+id/directionDescriptionTextView"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/directionTextInputLayout"
+        app:layout_constraintTop_toBottomOf="@id/directionTitleTextView"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginRight="20dp"
+        android:enabled="false"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/directionDescriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/editarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:textSize="15sp"
-        app:layout_constraintTop_toBottomOf="@id/directionTitleTextView"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/directionTextInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:text="Editar" />
+
+    <Button
+        android:id="@+id/guardarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/directionTextInputLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:text="Guardar" />
 </androidx.constraintlayout.widget.ConstraintLayout>

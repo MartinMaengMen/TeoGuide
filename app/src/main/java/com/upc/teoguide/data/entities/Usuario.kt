@@ -8,9 +8,9 @@ import java.io.Serializable
 @Entity(tableName = "usuarios")
 data class Usuario (
     @PrimaryKey(autoGenerate = true)
-    val id : Int,
+    var id : Int,
     @ColumnInfo(name = "email")
-    val email: String?,
+    var email: String?,
     @ColumnInfo(name = "password")
     val password: String?,
     @ColumnInfo(name = "name")
