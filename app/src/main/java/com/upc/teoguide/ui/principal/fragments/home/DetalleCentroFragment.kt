@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.bumptech.glide.Glide
@@ -29,6 +30,11 @@ class DetalleCentroFragment : Fragment() {
         //return super.onCreateView(inflater, container, savedInstanceState)
         _binding = FragmentDetalleCentroBinding.inflate(inflater, container, false)
         mostrarDetalle()
+        _binding!!.button.setOnClickListener {
+            val action = DetalleCentroFragmentDirections.actionDetalleCentroFragmentToTourFragment()
+            NavHostFragment.findNavController(this)
+                .navigate(action)
+        }
         return binding.root
     }
 
