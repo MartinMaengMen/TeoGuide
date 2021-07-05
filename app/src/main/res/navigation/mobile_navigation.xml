@@ -35,6 +35,11 @@
         <argument android:name="centroArg"
         app:argType="com.upc.teoguide.data.entities.CentroHistorico"/>
     </fragment>
+    <fragment
+        android:id="@+id/navigation_explorer"
+        android:name="com.upc.teoguide.ui.principal.fragments.explore.ExporeFragment"
+        android:label="fragment_expore"
+        tools:layout="@layout/fragment_expore" />
 
 
 </navigation>

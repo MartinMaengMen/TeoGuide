@@ -6,11 +6,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.gms.maps.*
 
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.upc.teoguide.R
@@ -30,9 +27,10 @@ class ExporeFragment : Fragment() {
          * install it inside the SupportMapFragment. This method will only be triggered once the
          * user has installed Google Play services and returned to the app.
          */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val huallamarca = LatLng(-12.097147060919646, -77.04048228878406)
+        googleMap.addMarker(MarkerOptions().position(huallamarca).title("Marker in Sydney")).showInfoWindow()
+        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(huallamarca))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(huallamarca,15f))
     }
 
     override fun onCreateView(
