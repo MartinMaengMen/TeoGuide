@@ -12,34 +12,49 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_navigation_home_to_detalleCentroFragment2"
-            app:destination="@id/detalleCentroFragment" />
+            app:destination="@id/detalleCentroFragment"
+            app:popUpTo="@id/navigation_home" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.upc.teoguide.ui.principal.fragments.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_createPlanFragment"
+            app:destination="@id/createPlanFragment"
+            app:popUpTo="@id/navigation_dashboard" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.upc.teoguide.ui.principal.fragments.profile.ProfileFragment"
-        android:label="@string/title_notifications"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/detalleCentroFragment"
         android:name="com.upc.teoguide.ui.principal.fragments.home.DetalleCentroFragment"
-        android:label="fragment_detalle_centro"
+        android:label="{labelArg}"
         tools:layout="@layout/fragment_detalle_centro">
 
         <argument android:name="centroArg"
         app:argType="com.upc.teoguide.data.entities.CentroHistorico"/>
+        <argument android:name="labelArg"
+            app:argType="string"/>
     </fragment>
+
     <fragment
         android:id="@+id/navigation_explorer"
         android:name="com.upc.teoguide.ui.principal.fragments.explore.ExporeFragment"
-        android:label="fragment_expore"
+        android:label="@string/title_explorer"
         tools:layout="@layout/fragment_expore" />
+    <fragment
+        android:id="@+id/createPlanFragment"
+        android:name="com.upc.teoguide.ui.principal.fragments.dashboard.CreatePlanFragment"
+        android:label="Crear Plan"
+        tools:layout="@layout/fragment_create_plan" />
 
 
 </navigation>

@@ -6,10 +6,8 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
@@ -94,7 +92,7 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
     }
 
     override fun onClickedCentroHistorico(centroHistorico: CentroHistorico, textView: TextView) {
-        val action  = HomeFragmentDirections.actionNavigationHomeToDetalleCentroFragment2(centroHistorico)
+        val action  = HomeFragmentDirections.actionNavigationHomeToDetalleCentroFragment2(centroHistorico, centroHistorico.nombre)
         val extras = FragmentNavigatorExtras(
             textView to centroHistorico.id.toString()
         )

@@ -19,6 +19,9 @@ data class CentroHistorico (
     @SerializedName("imgUrl")
     val imgUrl: String,
 
+    @SerializedName("direccion")
+    val direccion: String,
+
     @SerializedName("latitud")
     val latitud: Double,
 
