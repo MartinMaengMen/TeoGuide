@@ -109,7 +109,7 @@ class CreatePlanFragment : Fragment() {
                 Toast.makeText(context,"Plan registrado correctamente!", Toast.LENGTH_LONG).show()
                 NavHostFragment.findNavController(this).popBackStack()
             } else {
-                Toast.makeText(context,"Error al crear el plan!", Toast.LENGTH_LONG).show()
+                //Toast.makeText(context,"Error al crear el plan!", Toast.LENGTH_LONG).show()
                 binding.etTituloPlan.setText("")
                 binding.etDescripcionPlan.setText("")
                 binding.etFechaPlan.setText("")

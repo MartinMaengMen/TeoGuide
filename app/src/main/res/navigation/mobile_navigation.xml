@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/tourFragment"
         android:name="com.upc.teoguide.ui.principal.fragments.home.TourFragment"
-        android:label="fragment_tour"
+        android:label="Tour Multimedia"
         tools:layout="@layout/fragment_tour" >
     </fragment>
 
