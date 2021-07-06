@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">TeoGuide</string>
     <string name="title_activity_home">MainActivity</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">Planes</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_profile">Profile</string>
+    <string name="title_profile">Perfil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="detalle_centro">Centro Histórico</string>
+    <string name="title_information">HISTORIA</string>
+    <string name="title_explorer">Explorar</string>
+    <string name="title_create_plan">Crear Plan</string>
 </resources>

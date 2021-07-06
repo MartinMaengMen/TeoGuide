@@ -18,19 +18,16 @@ class ExporeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
+        val mateoSalado = LatLng(-12.067163839786117, -77.06362247344228)
+        googleMap.addMarker(MarkerOptions().position(mateoSalado).title("Huaca Mateo-Salado"))
+        val huacaSanMiguel = LatLng(-12.070137734933882, -77.08431095138)
+        googleMap.addMarker(MarkerOptions().position(huacaSanMiguel).title("Huaca San Miguel"))
+        val huacaMangomarca = LatLng(-12.014978831873446, -76.98147327020303)
+        googleMap.addMarker(MarkerOptions().position(huacaMangomarca).title("Huaca MangoMarca"))
         val huallamarca = LatLng(-12.097147060919646, -77.04048228878406)
-        googleMap.addMarker(MarkerOptions().position(huallamarca).title("Marker in Sydney")).showInfoWindow()
-        //googleMap.moveCamera(CameraUpdateFactory.newLatLng(huallamarca))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(huallamarca,15f))
+        googleMap.addMarker(MarkerOptions().position(huallamarca).title("Huaca Huallamarca")).showInfoWindow()
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(huallamarca,12f))
+
     }
 
     override fun onCreateView(
@@ -38,10 +35,8 @@ class ExporeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var binding = FragmentExporeBinding.inflate(inflater, container, false)
-        _binding = binding
+        _binding = FragmentExporeBinding.inflate(inflater, container, false)
         return binding.root
-    //return inflater.inflate(R.layout.fragment_expore, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

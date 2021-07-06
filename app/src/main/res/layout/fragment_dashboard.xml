@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E9E9E9"
     tools:context=".ui.principal.fragments.dashboard.DashboardFragment">
 
-    <CalendarView
+    <!--<CalendarView
         android:id="@+id/calendarView2"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
@@ -26,21 +27,24 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         app:layout_constraintTop_toBottomOf="@id/calendarView2"
-        tools:text="7 Jan, 2019" />
+        tools:text="7 Jan, 2019" />-->
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/exThreeRv"
-        app:layout_constraintTop_toBottomOf="@id/exThreeSelectedDateText"
+        android:id="@+id/rvPlanes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false" />
+        android:layout_height="match_parent"
+        android:nestedScrollingEnabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton2"
+        android:id="@+id/fabAddPlan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:layout_gravity="end|bottom"
+        android:layout_margin="20dp"
         android:clickable="true"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
