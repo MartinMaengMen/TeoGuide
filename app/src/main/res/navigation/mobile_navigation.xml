@@ -38,9 +38,10 @@
         android:name="com.upc.teoguide.ui.principal.fragments.home.DetalleCentroFragment"
         android:label="{labelArg}"
         tools:layout="@layout/fragment_detalle_centro">
-
         <argument android:name="centroArg"
         app:argType="com.upc.teoguide.data.entities.CentroHistorico" />
+        <argument android:name="labelArg"
+            app:argType="string"/>
         <action
             android:id="@+id/action_detalleCentroFragment_to_tourFragment"
             app:destination="@id/tourFragment" />
