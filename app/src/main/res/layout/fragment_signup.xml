@@ -40,6 +40,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/nameTextInput"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ingrese su nombre" />
@@ -57,6 +58,7 @@
                 android:id="@+id/userTextInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
                 android:hint="Ingrese su correo" />
         </com.google.android.material.textfield.TextInputLayout>
 

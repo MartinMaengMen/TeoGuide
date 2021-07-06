@@ -39,18 +39,22 @@ class SignUpFragment : Fragment(){
             var name = _binding?.nameTextInput?.text.toString()
             var password = _binding?.passwordTextInput?.text.toString()
             var verifyPassword = _binding?.verifyPasswordTextInput?.text.toString()
-            if(name !="" && email!="" && password!="" && password == verifyPassword){
-                var usuario = Usuario(
-                    0,
-                    _binding?.userTextInput?.text.toString(),
-                    _binding?.passwordTextInput?.text.toString(),
-                    name)
-                SignUpViewModel(database!!).postUsuario(usuario)
-                val action = SignUpFragmentDirections.actionNavigationSignupToNavigationSignin()
-                NavHostFragment.findNavController(this).navigate(action)
+            if(email.contains("@")){
+                if(name !="" && email!="" && password!="" && password == verifyPassword){
+                    var usuario = Usuario(
+                        0,
+                        _binding?.userTextInput?.text.toString(),
+                        _binding?.passwordTextInput?.text.toString(),
+                        name)
+                    SignUpViewModel(database!!).postUsuario(usuario)
+                    val action = SignUpFragmentDirections.actionNavigationSignupToNavigationSignin()
+                    NavHostFragment.findNavController(this).navigate(action)
+                }
+                else
+                    Toast.makeText(this@SignUpFragment.context,"Las contraseñas no coinciden",Toast.LENGTH_LONG).show()
             }
             else
-                Toast.makeText(this@SignUpFragment.context,"Las contraseñas no coinciden",Toast.LENGTH_LONG).show()
+                Toast.makeText(this@SignUpFragment.context,"El email no es valido",Toast.LENGTH_LONG).show()
         }
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
