@@ -30,6 +30,7 @@ import com.google.android.gms.location.LocationServices
 import com.squareup.picasso.Picasso
 import com.upc.teoguide.R
 import com.upc.teoguide.data.entities.CentroHistorico
+import com.upc.teoguide.data.entities.Global
 import com.upc.teoguide.databinding.FragmentHomeBinding
 import com.upc.teoguide.ui.principal.fragments.home.adapters.ListaCentrosHistoricosAdapter
 import retrofit2.http.Url
@@ -61,7 +62,10 @@ class HomeFragment : Fragment(), ListaCentrosHistoricosAdapter.CentrosHistoricos
         focusedLocation = LocationServices.getFusedLocationProviderClient(binding.root.context)
         setUpRecyclerView()
         setUpObservers()
-        getLocation()
+        if(!Global.primerInicio){
+            getLocation()
+            Global.primerInicio = true
+        }
         //setUpNotifications()
         return binding.root
 
