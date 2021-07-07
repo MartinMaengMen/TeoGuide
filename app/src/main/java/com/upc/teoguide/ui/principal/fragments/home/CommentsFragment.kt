@@ -30,7 +30,6 @@ class CommentsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentCommentsBinding.inflate(inflater, container, false)
         val editText = binding.etAddComment
         binding.clComments.setOnClickListener {

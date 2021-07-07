@@ -22,6 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:textColor="@color/purple_700"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/ivCommentUser"
         app:layout_constraintTop_toTopOf="@+id/ivCommentUser"

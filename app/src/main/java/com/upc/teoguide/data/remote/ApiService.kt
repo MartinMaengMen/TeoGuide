@@ -2,6 +2,7 @@ package com.upc.teoguide.data.remote
 
 import com.upc.teoguide.data.entities.CentroHistorico
 import com.upc.teoguide.data.entities.Comentario
+import com.upc.teoguide.data.entities.Multimedia
 import com.upc.teoguide.data.entities.Plan
 import com.upc.teoguide.data.remote.request.ComentarioReq
 import com.upc.teoguide.data.remote.request.PlanReq
@@ -22,6 +23,9 @@ interface ApiService {
 
     @GET("planes/{param}")
     fun getPlanesByUserId(@Path("param") param: Int): Call<List<Plan>>
+
+    @GET("multimedias/imagenes/{param}")
+    fun getMultimediasByCentroId(@Path("param") param: Int): Call<List<Multimedia>>
 
     @POST("usuarios")
     fun postUsuario(@Body body: UsuarioReq): Call<Int>

@@ -32,7 +32,13 @@ class ViewPagerAdapter(fragment: Fragment, private val centro: CentroHistorico) 
                 }
                 return fragment
             }
-            else -> ImagesFragment()
+            else -> {
+                val fragment = ImagesFragment()
+                fragment.arguments = Bundle().apply {
+                    putInt("arg1", centro.id)
+                }
+                return fragment
+            }
         }
     }
 
